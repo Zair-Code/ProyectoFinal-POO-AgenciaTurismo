@@ -4,19 +4,15 @@
  */
 package clases;
 
-/**
- *
- * @author Phillipe
- */
 public abstract class Persona {
-    protected String dni;
-    protected String apellido;
-    protected String nombre;
+    private String dni;
+    private String nombres;
+    private String apellidos;
 
-    public Persona(String dni, String apellido, String nombre) {
+    public Persona(String dni, String nombres, String apellidos) {
         this.dni = dni;
-        this.apellido = apellido;
-        this.nombre = nombre;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
     }
 
     public String getDni() {
@@ -27,23 +23,31 @@ public abstract class Persona {
         this.dni = dni;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
-    
+
     public String mostrarInformacion() {
-        return "Cliente{" + "dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + '}';
+        return "Documento: " + dni
+                + "\nNombres: " + nombres
+                + "\nApellidos: " + apellidos;
     }
 }
+
+/**
+ *
+ * @author Phillipe
+ */
+

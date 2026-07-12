@@ -4,50 +4,51 @@
  */
 package clases;
 
+public abstract class Empleado extends Persona{
+    private String usuario;
+    private String contraseña;
+
+    public Empleado(String dni, String nombres, String apellidos,
+                    String usuario, String contraseña) {
+
+        super(dni, nombres, apellidos);
+
+        this.usuario = usuario;
+        this.contraseña = this.contraseña;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+
+    public abstract String getRol();
+
+    public abstract String mostrarFunciones();
+
+    @Override
+    public String mostrarInformacion() {
+        return super.mostrarInformacion()
+                + "\nUsuario: " + usuario
+                + "\nRol: " + getRol();
+    }
+
+
+}
 /**
  *
  * @author Phillipe
  */
-public  class Empleado extends Persona {
-    private String Contraseña;
-    private String Rol;
-    private String Usuario;
 
-    public Empleado(String dni, String apellido, String nombre,String Contraseña,String Rol,String Usuario) {
-        super(dni, apellido, nombre);
-        this.Contraseña = Contraseña;
-        this.Rol = Rol;
-        this.Usuario = Usuario;
-    }
-
-    public String getContraseña() {
-        return Contraseña;
-    }
-
-    public void setContraseña(String Contraseña) {
-        this.Contraseña = Contraseña;
-    }
-
-    public String getRol() {
-        return Rol;
-    }
-
-    public void setRol(String Rol) {
-        this.Rol = Rol;
-    }
-
-    public String getUsuario() {
-        return Usuario;
-    }
-
-    public void setUsuario(String Usuario) {
-        this.Usuario = Usuario;
-    }
-
-    
-    public String InfoEmpleado() {
-        return "Empleado{" + "Contrase\u00f1a=" + Contraseña + ", Rol=" + Rol + ", Usuario=" + Usuario + '}';
-    }
-    
-    
-}

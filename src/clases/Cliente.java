@@ -8,20 +8,32 @@ package clases;
  *
  * @author Phillipe
  */
-public class Cliente extends Persona {
-    
+public class Cliente extends Persona{
+    private String tipoDocumento;
     private String fechaNacimiento;
     private String nacionalidad;
     private String telefono;
-    private String email;
+    private String correo;
 
-    public Cliente(String dni, String apellido, String nombre,String fechaNacimiento,String nacionalidad,String telefono,String email) {
-        super(dni, apellido, nombre);
-        this.fechaNacimiento= fechaNacimiento;
-        this.nacionalidad= nacionalidad;
-        this.telefono= telefono;
-        this.email= email;
-        
+    public Cliente(String dni, String nombres, String apellidos,
+                   String tipoDocumento, String fechaNacimiento,
+                   String nacionalidad, String telefono, String correo) {
+
+        super(dni, nombres, apellidos);
+
+        this.tipoDocumento = tipoDocumento;
+        this.fechaNacimiento = fechaNacimiento;
+        this.nacionalidad = nacionalidad;
+        this.telefono = telefono;
+        this.correo = correo;
+    }
+
+    public String getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 
     public String getFechaNacimiento() {
@@ -48,25 +60,31 @@ public class Cliente extends Persona {
         this.telefono = telefono;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    //Info Empleado 
-    public String InfoCliente() {
-        return "Cliente{" + "fechaNacimiento=" + fechaNacimiento + ", nacionalidad=" + nacionalidad + ", telefono=" + telefono + ", email=" + email + '}';
+    @Override
+    public String mostrarInformacion() {
+        return "Tipo de documento: " + tipoDocumento
+                + "\n" + super.mostrarInformacion()
+                + "\nFecha de nacimiento: " + fechaNacimiento
+                + "\nNacionalidad: " + nacionalidad
+                + "\nTeléfono: " + telefono
+                + "\nCorreo: " + correo;
     }
-    
-
-    
-    
-    
-    
-    
-    
-    
 }
+    
+
+    
+    
+    
+    
+    
+    
+    
+
