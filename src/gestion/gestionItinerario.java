@@ -10,74 +10,108 @@ import clases.ItinerarioDetallado;
  * @author Phillipe
  */
 public class gestionItinerario {
-    
-    private Itinerario[] itinerarios;
+    private ItinerarioDetallado[] itinerarios;
     private int totalItinerarios;
-    
-    public GestionItinerario() {
-        itinerarios = new Itinerario[100]; 
+
+    public gestionItinerario() {
+
+        itinerarios =
+                new ItinerarioDetallado[100];
+
         totalItinerarios = 0;
     }
-    
-    
-    public Itinerario buscarPorCodigo(String codigo) {
-        for (int i = 0; i < totalItinerarios; i++) {
-            if(itinerarios[i].getCodigoItinerario().equalsIgnoreCase(codigo)){
-                return itinerarios[i];
-            }
-        }
-        return null;
-    }
-    
-    public boolean registrar(Itinerario itinerario) {
-        if(totalItinerarios == itinerarios.length) {
+
+    public boolean registrar(
+            ItinerarioDetallado itinerario) {
+
+        if (itinerario == null) {
             return false;
         }
-        
-        
-        if(buscarPorCodigo(itinerario.getCodigoItinerario()) != null) {
+
+        if (totalItinerarios
+                >= itinerarios.length) {
+
             return false;
         }
-        
-        itinerarios[totalItinerarios] = itinerario;
+
+        itinerarios[totalItinerarios] =
+                itinerario;
+
         totalItinerarios++;
+
         return true;
     }
-    
-    public boolean actualizar(Itinerario itinerario) {
-        for (int i = 0; i < totalItinerarios; i++) {
-            if(itinerarios[i].getCodigoItinerario().equalsIgnoreCase(itinerario.getCodigoItinerario())){
-                itinerarios[i].setDescripcionActividades(itinerario.getDescripcionActividades());
-                itinerarios[i].setDia(itinerario.getDia());
-                return true;
-            }
+
+    public ItinerarioDetallado buscarPorPosicion(
+            int posicion) {
+
+        if (posicion < 0) {
+            return null;
         }
-        return false;
-    }
-    
-    public boolean eliminar(String codigo) {
-        for (int i = 0; i < totalItinerarios; i++) {
-            if(itinerarios[i].getCodigoItinerario().equalsIgnoreCase(codigo)){
-                
-                
-                for (int j = i; j < totalItinerarios - 1; j++) {
-                    itinerarios[j] = itinerarios[j+1];
-                }
-                
-                itinerarios[totalItinerarios - 1] = null;
-                totalItinerarios--;
-                return true;
-            }
+
+        if (posicion >= totalItinerarios) {
+            return null;
         }
-        return false;
+
+        return itinerarios[posicion];
     }
-    
-    public Itinerario[] obtenerItinerarios() {
+
+    public boolean actualizar(
+            int posicion,
+            ItinerarioDetallado itinerarioNuevo) {
+
+        if (itinerarioNuevo == null) {
+            return false;
+        }
+
+        if (posicion < 0) {
+            return false;
+        }
+
+        if (posicion >= totalItinerarios) {
+            return false;
+        }
+
+        itinerarios[posicion] =
+                itinerarioNuevo;
+
+        return true;
+    }
+
+    public boolean eliminar(int posicion) {
+
+        if (posicion < 0) {
+            return false;
+        }
+
+        if (posicion >= totalItinerarios) {
+            return false;
+        }
+
+        for (int i = posicion;
+             i < totalItinerarios - 1;
+             i++) {
+
+            itinerarios[i] =
+                    itinerarios[i + 1];
+        }
+
+        itinerarios[totalItinerarios - 1] =
+                null;
+
+        totalItinerarios--;
+
+        return true;
+    }
+
+    public ItinerarioDetallado[]
+    obtenerItinerarios() {
+
         return itinerarios;
     }
-    
+
     public int obtenerTotalItinerarios() {
+
         return totalItinerarios;
     }
-}
 }

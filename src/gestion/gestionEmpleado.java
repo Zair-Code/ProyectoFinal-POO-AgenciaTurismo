@@ -11,14 +11,14 @@ import clases.Empleado;
 public class gestionEmpleado {
     private Empleado[] empleados;
     private int totalEmpleados;
-    
+
     public gestionEmpleado() {
         empleados = new Empleado[50]; // Tamaño fijo como en tu ejemplo
         totalEmpleados = 0;
-        
+
         // Puedes precargar algunos aquí si lo necesitas para probar
     }
-    
+
     public Empleado buscarPorDni(String dni) {
         for (int i = 0; i < totalEmpleados; i++) {
             if(empleados[i].getDni().equalsIgnoreCase(dni)){
@@ -27,21 +27,21 @@ public class gestionEmpleado {
         }
         return null;
     }
-    
+
     public boolean registrar(Empleado emp) {
         if(totalEmpleados == empleados.length) {
             return false;
         }
-        
+
         if(buscarPorDni(emp.getDni()) != null) {
             return false;
         }
-        
+
         empleados[totalEmpleados] = emp;
         totalEmpleados++;
         return true;
     }
-    
+
     public boolean actualizar(Empleado emp) {
         for (int i = 0; i < totalEmpleados; i++) {
             if(empleados[i].getDni().equalsIgnoreCase(emp.getDni())){
@@ -49,13 +49,13 @@ public class gestionEmpleado {
                 empleados[i].setApellidos(emp.getApellidos());
                 empleados[i].setUsuario(emp.getUsuario());
                 empleados[i].setContraseña(emp.getContraseña());
-                
+
                 return true;
             }
         }
         return false;
     }
-    
+
     public boolean eliminar(String dni) {
         for (int i = 0; i < totalEmpleados; i++) {
             if(empleados[i].getDni().equalsIgnoreCase(dni)){
@@ -71,13 +71,12 @@ public class gestionEmpleado {
         }
         return false;
     }
-    
+
     public Empleado[] obtenerEmpleados() {
         return empleados;
     }
-    
+
     public int obtenerTotalEmpleados() {
         return totalEmpleados;
     }
 }
-
