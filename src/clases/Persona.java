@@ -4,6 +4,10 @@
  */
 package clases;
 
+/**
+ *
+ * @author Phillipe
+ */
 public abstract class Persona {
     private String dni;
     private String nombres;
@@ -45,9 +49,3 @@ public abstract class Persona {
                 + "\nApellidos: " + apellidos;
     }
 }
-
-/**
- *
- * @author Phillipe
- */
-

@@ -9,7 +9,6 @@ package clases;
  * @author Phillipe
  */
 public class ServicioIncluido {
-
     private String tipoServicio;
     private String descripcion;
 

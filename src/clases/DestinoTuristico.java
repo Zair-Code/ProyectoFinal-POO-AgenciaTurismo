@@ -9,7 +9,6 @@ package clases;
  * @author Phillipe
  */
 public class DestinoTuristico {
-
     private String nombre;
     private String pais;
     private String ciudad;
@@ -89,6 +88,11 @@ public class DestinoTuristico {
 
     public void setRutaImagen(String rutaImagen) {
         this.rutaImagen = rutaImagen;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " - " + ciudad + ", " + pais;
     }
 
     public String mostrarInformacion() {

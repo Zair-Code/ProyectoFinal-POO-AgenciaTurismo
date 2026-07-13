@@ -12,7 +12,6 @@ import clases.Pago;
 import clases.PaqueteTuristico;
 import clases.Promocion;
 import clases.Reserva;
-
 /**
  *
  * @author Phillipe
@@ -209,8 +208,8 @@ public class SistemaAgencia {
 
     public int getContDestinos() {
 
-        return gestionDestinos.obtenerTotalDestinos();
-                
+        return gestionDestinos
+                .obtenerTotalDestinos();
     }
 
     // ==================================================

@@ -374,6 +374,11 @@ public class PaqueteTuristico {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return codigo + " - " + nombre + " (S/ " + precioPersona + ")";
+    }
+
     // MOSTRAR DESTINOS
 
     public String mostrarDestinos() {

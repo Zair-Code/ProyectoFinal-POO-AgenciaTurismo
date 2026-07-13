@@ -15,6 +15,9 @@ public class Cliente extends Persona{
     private String telefono;
     private String correo;
 
+    // Programa de fidelización
+    private int puntosFidelidad;
+
     public Cliente(String dni, String nombres, String apellidos,
                    String tipoDocumento, String fechaNacimiento,
                    String nacionalidad, String telefono, String correo) {
@@ -26,6 +29,8 @@ public class Cliente extends Persona{
         this.nacionalidad = nacionalidad;
         this.telefono = telefono;
         this.correo = correo;
+
+        this.puntosFidelidad = 0;
     }
 
     public String getTipoDocumento() {
@@ -68,6 +73,50 @@ public class Cliente extends Persona{
         this.correo = correo;
     }
 
+    // ==================================================
+    // PROGRAMA DE FIDELIZACIÓN
+    // ==================================================
+
+    public int getPuntosFidelidad() {
+        return puntosFidelidad;
+    }
+
+    /**
+     * Acumula puntos de fidelidad en función de un monto pagado.
+     * Regla: 1 punto por cada S/ 10 pagados.
+     */
+    public void acumularPuntos(double montoPagado) {
+
+        if (montoPagado <= 0) {
+            return;
+        }
+
+        puntosFidelidad += (int) (montoPagado / 10);
+    }
+
+    /**
+     * Calcula el nivel de fidelidad actual del cliente según sus puntos
+     * acumulados. Aprovecha el polimorfismo de NivelFidelidad: quien use
+     * el nivel no necesita saber si es Bronce, Plata u Oro.
+     */
+    public NivelFidelidad getNivelFidelidad() {
+
+        if (puntosFidelidad >= 1500) {
+            return new Oro();
+        }
+
+        if (puntosFidelidad >= 500) {
+            return new Plata();
+        }
+
+        return new Bronce();
+    }
+
+    @Override
+    public String toString() {
+        return getNombres() + " " + getApellidos() + " (" + getDni() + ")";
+    }
+
     @Override
     public String mostrarInformacion() {
         return "Tipo de documento: " + tipoDocumento
@@ -75,16 +124,8 @@ public class Cliente extends Persona{
                 + "\nFecha de nacimiento: " + fechaNacimiento
                 + "\nNacionalidad: " + nacionalidad
                 + "\nTeléfono: " + telefono
-                + "\nCorreo: " + correo;
+                + "\nCorreo: " + correo
+                + "\nPuntos de fidelidad: " + puntosFidelidad
+                + " (Nivel " + getNivelFidelidad().getNombreNivel() + ")";
     }
 }
-    
-
-    
-    
-    
-    
-    
-    
-    
-

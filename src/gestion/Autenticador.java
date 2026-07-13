@@ -3,10 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package gestion;
-
 import clases.Empleado;
-
 /**
+ *
  * @author Phillipe
  */
 public class Autenticador {
@@ -25,17 +24,11 @@ public class Autenticador {
         int total = gestionEmpleado.obtenerTotalEmpleados();
 
         for (int i = 0; i < total; i++) {
-            Empleado emp = empleados[i];
-            
-            // 1. Validamos que el empleado no sea nulo
-            // 2. Validamos que usuario y contraseña no sean nulos antes de comparar
-            if (emp != null && emp.getUsuario() != null && emp.getContraseña() != null) {
-                
-                if (emp.getUsuario().equals(usuario) && emp.getContraseña().equals(password)) {
-                    return emp; // Credenciales correctas
-                }
+            if (empleados[i].getUsuario().equals(usuario) &&
+                    empleados[i].getContraseña().equals(password)) {
+                return empleados[i]; // Retorna el empleado encontrado
             }
         }
-        return null; // Credenciales incorrectas o no encontradas
+        return null; // Credenciales incorrectas
     }
 }

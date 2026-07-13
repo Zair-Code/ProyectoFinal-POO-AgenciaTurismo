@@ -82,4 +82,3 @@ public class gestionDestino {
         return totalDestinos;
     }
 }
-   

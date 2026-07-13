@@ -4,7 +4,12 @@
  */
 package clases;
 
-public abstract class Empleado extends Persona{
+/**
+ *
+ * @author Phillipe
+ */
+public abstract class Empleado extends Persona {
+
     private String usuario;
     private String contraseña;
 
@@ -14,7 +19,7 @@ public abstract class Empleado extends Persona{
         super(dni, nombres, apellidos);
 
         this.usuario = usuario;
-        this.contraseña = this.contraseña;
+        this.contraseña = contraseña;
     }
 
     public String getUsuario() {
@@ -44,11 +49,4 @@ public abstract class Empleado extends Persona{
                 + "\nUsuario: " + usuario
                 + "\nRol: " + getRol();
     }
-
-
 }
-/**
- *
- * @author Phillipe
- */
-

@@ -8,8 +8,7 @@ package clases;
  *
  * @author Phillipe
  */
-public class Operador extends Empleado {
-
+public class Operador extends Empleado{
     public Operador(String dni, String nombres, String apellidos,
                     String usuario, String contrasena) {
 

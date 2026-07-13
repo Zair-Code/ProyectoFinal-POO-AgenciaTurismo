@@ -11,3 +11,4 @@ package clases;
 public interface Calculable {
     double calcularPrecioTotal();
 }
+

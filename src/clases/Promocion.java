@@ -113,6 +113,11 @@ public class Promocion {
         return precioFinal;
     }
 
+    @Override
+    public String toString() {
+        return codigo + " - " + descripcion;
+    }
+
     public String mostrarInformacion() {
 
         String estadoPromocion;

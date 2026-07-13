@@ -4,7 +4,6 @@
  */
 package gestion;
 import clases.ItinerarioDetallado;
-
 /**
  *
  * @author Phillipe

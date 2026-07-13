@@ -9,7 +9,6 @@ package clases;
  * @author Phillipe
  */
 public class Reserva implements Calculable{
-
     private String codigoReserva;
     private String fechaReserva;
 
@@ -30,6 +29,10 @@ public class Reserva implements Calculable{
 
     private double precioTotal;
     private String estado;
+
+    // Programa de fidelización
+    private double descuentoFidelidadAplicado;
+    private String nivelFidelidadAplicado;
 
     public Reserva(String codigoReserva,
                    String fechaReserva,
@@ -54,6 +57,9 @@ public class Reserva implements Calculable{
 
         cantidadClientes = 0;
         cantidadPagos = 0;
+
+        descuentoFidelidadAplicado = 0;
+        nivelFidelidadAplicado = null;
 
         if (datosValidos()) {
 
@@ -335,8 +341,90 @@ public class Reserva implements Calculable{
         cantidadPagos++;
 
         actualizarEstado();
+        acumularPuntosFidelidad(pago);
 
         return true;
+    }
+
+    /**
+     * Reparte los puntos de fidelidad generados por un pago entre los
+     * clientes registrados en la reserva.
+     */
+    private void acumularPuntosFidelidad(Pago pago) {
+
+        if (cantidadClientes == 0) {
+            return;
+        }
+
+        double montoPorCliente =
+                pago.getMonto() / cantidadClientes;
+
+        for (int i = 0; i < cantidadClientes; i++) {
+            clientes[i].acumularPuntos(montoPorCliente);
+        }
+    }
+
+    /**
+     * Aplica un descuento adicional al precio total de la reserva según
+     * el mejor nivel de fidelidad entre los clientes registrados.
+     * Se apoya en el polimorfismo de NivelFidelidad: no necesita saber
+     * si el nivel es Bronce, Plata u Oro para calcular el descuento.
+     * Solo puede aplicarse una vez por reserva.
+     */
+    public boolean aplicarDescuentoFidelidad() {
+
+        if (cantidadClientes == 0) {
+            return false;
+        }
+
+        if (descuentoFidelidadAplicado > 0) {
+            return false;
+        }
+
+        if (estado.equalsIgnoreCase("Cancelada")
+                || estado.equalsIgnoreCase("Sin cupo")
+                || estado.equalsIgnoreCase("Inválida")) {
+
+            return false;
+        }
+
+        NivelFidelidad mejorNivel = null;
+
+        for (int i = 0; i < cantidadClientes; i++) {
+
+            NivelFidelidad nivel = clientes[i].getNivelFidelidad();
+
+            if (mejorNivel == null
+                    || nivel.getPorcentajeDescuento()
+                    > mejorNivel.getPorcentajeDescuento()) {
+
+                mejorNivel = nivel;
+            }
+        }
+
+        if (mejorNivel == null || mejorNivel.getPorcentajeDescuento() <= 0) {
+            return false;
+        }
+
+        double descuento =
+                precioTotal * mejorNivel.getPorcentajeDescuento() / 100;
+
+        precioTotal = precioTotal - descuento;
+
+        descuentoFidelidadAplicado = descuento;
+        nivelFidelidadAplicado = mejorNivel.getNombreNivel();
+
+        actualizarEstado();
+
+        return true;
+    }
+
+    public double getDescuentoFidelidadAplicado() {
+        return descuentoFidelidadAplicado;
+    }
+
+    public String getNivelFidelidadAplicado() {
+        return nivelFidelidadAplicado;
     }
 
     public void actualizarEstado() {
@@ -414,6 +502,14 @@ public class Reserva implements Calculable{
                 + "\nEstado: "
                 + estado;
 
+        if (descuentoFidelidadAplicado > 0) {
+
+            informacion += "\nDescuento fidelidad ("
+                    + nivelFidelidadAplicado
+                    + "): S/ "
+                    + descuentoFidelidadAplicado;
+        }
+
         informacion += "\n\nCLIENTES DE LA RESERVA:";
 
         if (cantidadClientes == 0) {
@@ -480,6 +576,14 @@ public class Reserva implements Calculable{
                 + "\nSaldo pendiente: S/ "
                 + calcularSaldoPendiente()
                 + "\nEstado: " + estado;
+
+        if (descuentoFidelidadAplicado > 0) {
+
+            voucher += "\nDescuento fidelidad ("
+                    + nivelFidelidadAplicado
+                    + "): S/ "
+                    + descuentoFidelidadAplicado;
+        }
 
         voucher += "\n\nCLIENTES:";
 
